@@ -22,9 +22,18 @@ class CalcDisplay (ttk.Frame): #Display donde sale el resultado
         self.lblDisplay.pack(fill=BOTH, expand=True)
 
     def addDigit(self, digito):
-        if len(self._value) == 10:
+        if len(self._value) == 11 or self._value[0] != '-' and len(self._value) == 10:
             return
-
+        '''
+        if self.value[0] == "-":
+            if len(self._value) == 10:
+                longmax= 11
+            else:
+                longmax = 10
+        
+        if len(self._value) >= longmax:
+            return
+        '''
         if self._value == '0':
             self._value = digito
         else:
@@ -104,13 +113,13 @@ class Calculator(ttk.Frame):
         CalcButton(self, text='=', command=None).grid(column=3, row=5)
         #Usamos lambda porque command no permite funciones con parámetros, así que usamos una funcion anonima para enviar un valor
 
- def opera(self, operador):
-     if self._op1 is None
-        self._op1 = float(self.display._value)
-        self._operador = operador
-        selff.display.reset()
-    else:
-        self._op2 = float(self.display_value)
+    def opera(self, operador):
+        if self._op1 is None:
+            self._op1 = float(self.display._value)
+            self._operador = operador
+            selff.display.reset()
+        else:
+            self._op2 = float(self.display_value)
             if self._operador == '+':
                 resultado = self._op1 + self._op2
             elif self._operador == '-':
